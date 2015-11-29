@@ -12,9 +12,9 @@
 
      $ mvn clean verify package
 
-Maven 3 and Java are required to build the application.
+Maven 3 and Java 8 are required to build the application.
 
-Once the application is built, JavaDocs will be present in the following directory:
+Once the application is built, JavaDocs can be found in the following directory:
 
      ./target/apidocs/index.html
 
@@ -25,7 +25,7 @@ Once the application is built, JavaDocs will be present in the following directo
      $ java -jar ./target/summarizer-1.0-SNAPSHOT-jar-with-dependencies.jar
           {--url=<URL of the gzipped data file>}
 
-The summary will then be printed to the standard output:
+The summary report will then be printed to the standard output, e.g.:
 
     100
     30
@@ -48,34 +48,34 @@ At the moment, logs are generated in the folder `./logs` for the application and
 ### <a name="behavioral-driven-development"></a> BEHAVIORAL DRIVEN DEVELOPMENT
 
 The application has BDD integration tests using JBehave, additionally to unit tests (JUnit).
-After the application is built, JBehave reports will be available in the following HTML file:
+After the application is built, JBehave reports can be found in the following HTML file:
 
     ./target/jbehave/view/reports.html
 
-BDD scenarios can be found in the following fle:
+BDD scenarios are defined in the following fle:
 
     ./src/test/resources/jbehave/stories/summarizer.story
 
 ### <a name="on-the-design-choices"></a> ON THE DESIGN CHOICES
 
 Given the requirement of querying data from CSV files, I have chosen
-[CSV jdvbc ](http://csvjdbc.sourceforge.net/develop.html) for the task. 
+[CSV jdbc](http://csvjdbc.sourceforge.net/develop.html) for the task. 
 This framework makes possible to run SQL queries against CSV files.
 
-The framework is also easily customizable regarding the source of the CSV data.
+The framework is also easily customizable regarding the source of the data.
  It allows the implementation of a custom table reader class by implementing
- the provided interface `TableReader`, which is used by CSV jdbc's database driver.
+ the provided interface `TableReader`, which is used by frameworks' database driver.
 
-A custom table reader has been implemented to fetch CSV data using the HTTP or HTTPS protocols. Particularly 
+This table reader has been implemented to fetch data using the HTTP or HTTPS protocols. Particularly 
  the method `TableReader.getReader()` returns `InputStreamReader`, thus, we can take advantage of the decorator pattern
 to handle compressed data by using `GZIPInputStream`.
 
 Once the custom reader has been implemented, it's pretty strait forward to perform standard SQL queries to compute the
- summary required for the report output.
+ summary report required for the output.
 
-Just for the fun of it, I have used [SpringBoot](http://projects.spring.io/spring-boot/) instead of a standard stand-alone Spring application.
+Just for the fun of it, I have used [SpringBoot](http://projects.spring.io/spring-boot/) instead of implementing a
+ standard stand-alone Spring application.
 Unfortunately [JBehave](http://jbehave.org/reference/stable/maven-goals.html), a powerful BDD (Behavioral Driven
-Development) framework, isn't yet compatible with SpringBoot, therefore, for my JBehave and JUnit tests, I have used
-standard Spring (both use their respective Spring runners and use the same `applicationContext.xml` file for
- configuration). 
+Development) framework, doesn't yet support SpringBoot, therefore, for my JBehave and JUnit tests, I have used
+old fashion Spring. 
 
