@@ -4,7 +4,7 @@
 ###### [Usage](#usage)
 ###### [Example](#example)
 ###### [Configuration](#configuration)
-##### [BEHAVIORAL DRIVEN DEVELOPMENT](behavioral-driven-development)
+##### [BEHAVIORAL DRIVEN DEVELOPMENT](#behavioral-driven-development)
 ##### [ON THE DESIGN CHOICES](#on-the-design-choices)
 
 
